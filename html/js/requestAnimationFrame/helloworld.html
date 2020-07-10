@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #canvas{
+            position: absolute;
+            width: 800px;  
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%) ;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    
+    <script>
+        var c = document.getElementById('canvas')
+        var ctx = c.getContext("2d")
+        ctx.font = "40px Arial"
+        var gradient=ctx.createLinearGradient(0,0,c.width,c.height);
+        gradient.addColorStop("0","red");
+        gradient.addColorStop("0.5","yellow");
+        gradient.addColorStop("1.0","green");
+        ctx.fillStyle = gradient
+        ctx.fillText("helloworld",60,85)
+        
+    </script>
+    
+</body>
+</html>
