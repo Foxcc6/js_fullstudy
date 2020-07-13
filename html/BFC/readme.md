@@ -12,7 +12,7 @@
 
 3. BFC -- Block Formatting Context  理念
 解决元素脱离文档流带来的负面影响,margin重叠问题
-bfc触发方式
+bfc触发方式：
 根元素或其它包含它的元素；
 浮动 (元素的float不为none)；
 绝对定位元素 (元素的position为absolute或fixed)；
