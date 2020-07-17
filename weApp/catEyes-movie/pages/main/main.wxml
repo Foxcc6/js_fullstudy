@@ -1,0 +1,51 @@
+<!--pages/main/main.wxml-->
+<view class="container">
+    <scroll-view scroll-y style="height:100%">
+        <view class="header">
+            <view class="header_hd">
+                <text>南昌</text>
+               <view class="downtips"></view> 
+            </view>
+            <view class="header_bd">
+                <view class="header_bd-hot header_hd-btn" bindtap="tabChangeHot" style="color:{{isLeft?'#ef4238':'#666'}}">正在上映</view>
+                <view class="header_bd-waiting header_hd-btn" bindtap="tabChangeWaiting" style="color:{{isLeft?'#666':'#ef4538'}}">即将上映</view>
+                <view class="bottomLine" style="left:{{isLeft?'73px':'143px'}}" bindtap="tabChangeWaiting" ></view>
+            </view>
+            <view class="header_ft">
+               <image src="../../images/search.png" > </image>
+            </view>
+        </view>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+        <!-- <swiper-item class="" item-id="">
+            <image class="slide-image" width="355" height="150" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594981965278&di=20c4748bd25c7d6d3e3d73f5d8ecdaec&imgtype=0&src=http%3A%2F%2Fwww.gjgwy.org%2Fuploadfile2013%2F2018%2F0524%2F20180524034322922.jpg"   />
+              
+        </swiper-item> -->
+        <swiper-item wx:for="{{imgUrls}}" wx:key="{{index}}">
+            <image class="slide-image" width="355" height="150" src="{{item}}" /> 
+            <!-- item是WX自带属性-->
+            
+        </swiper-item>
+    </swiper>
+      <view wx:for="{{movieList}}" wx:key="{{index}}">
+          <view class="flex item">
+              <view class="item_left">
+                <image  src="{{item.imgUrl}}" />
+                  
+              </view>
+              <view class="item_middle">
+                <view class="item_middle-title">第一次的离别</view>
+                <view class="item_middle-actor">艾萨·亚森,凯丽比努尔·热合米图力,艾力乃孜·热合米图力</view>
+                <view class="item_middle-time">2020-07-20</view>
+                <view class="item_middle-wantSee">9745</view>
+
+              </view>
+              <view class="item_right" >
+                  按钮
+              </view>
+
+          </view>
+      </view>
+    
+    
+    </scroll-view>
+</view>
