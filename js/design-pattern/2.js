@@ -2,6 +2,7 @@
 //策略模式
 //对象字面量
 // 工资发放策略
+//2020-7-19
 var strategies ={
     'A' : function(salary){
         return salary*20
