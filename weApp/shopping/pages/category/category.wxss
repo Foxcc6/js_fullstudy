@@ -1,1 +1,64 @@
 /* pages/category/category.wxss */
+.menu-left{
+    /* 相对于窗口定位,脱离文档流，加padding */
+    height: 100vh;
+    position:fixed;
+    left: 0;
+    top: 0;
+    width: 158rpx;
+    text-align: center;
+    border-right: 2rpx solid #999999;
+    display: inline-block;
+}
+.menu-left__name{
+    width: 100%;
+    text-align: center;
+    padding: 30rpx 0;
+    font-weight: 500;
+}
+.menu{
+  display: inline-block;
+  width: 100vw;
+  padding-left: 160rpx;
+}
+.menu-right{
+    width: 590rpx;
+    height: 100vh;
+}
+.menu-right__banner{
+    width: 510rpx;
+    height: 200rpx;
+    margin: 40rpx 40rpx 0 40rpx;
+}
+.banner{
+    width: 100%;
+    height: 100%;
+}
+.menu-right__cate{
+    padding: 30rpx 0;
+    width: 590rpx;
+    color: #ab956d;
+    text-align: center;
+}
+.menu-right__detail{
+    width: 33.3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20rpx 0;
+    flex-direction: column;
+    float: left;
+}
+.thumb{
+    width: 80rpx;
+    height: 80rpx;
+   
+}
+.thumb image{
+    height: 100%;
+    width: 100%;
+}
+.name{
+    margin-top: 20rpx;
+    font-size: 24rpx;
+}
