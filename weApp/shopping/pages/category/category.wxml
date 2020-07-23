@@ -2,8 +2,9 @@
 <!-- <scroll-view class="menu" scroll-y="true" upper-threshold="50" lower-threshold="50" 
    scroll-into-view="" scroll-with-animation="true" >   -->
    <view  class="menu-left">
-     <view class="menu-left__name" wx:for="{{category}}" id="{{item.id}}" bindtap="changeMenu" color="{{item.id?'#ef4238':'#666'}}">
+     <view class="menu-left__name" wx:for="{{category}}" id="{{item.id}}" bindtap="changeMenu" style="color:{{item.id==idname?'#ad8c60':'#000000'}}">
          {{item.name}}
+         <view wx:if="{{item.id==idname}}" class="box" ></view>
      </view> 
   </view>
   <scroll-view class="menu" scroll-y="true"  scroll-into-view="{{idname}}" scroll-with-animation="true" >  
