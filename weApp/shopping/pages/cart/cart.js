@@ -6,8 +6,80 @@ Page({
    */
   data: {
     carts:[],
-    totalPrice:0
+    totalPrice:0,
+    selectAllStatus:true
   },
+
+  selectAll(){
+    //来回改变数据源中的selectAllStatus   取反
+    let selectAllStatus = this.data.selectAllStatus
+    selectAllStatus = !selectAllStatus
+    // 把carts数组里每一条数据里的 selected改成false
+    let carts = this.data.carts
+    for(let i=0;i<carts.length;i++){
+      
+        carts[i].selected = selectAllStatus
+    
+    }
+    
+    this.setData({
+      selectAllStatus:selectAllStatus,
+      carts:carts
+    })
+  },
+
+  selectList(e){
+    console.log(e)
+    //让当前这条数据里的selected值取反
+    let index = e.currentTarget.dataset.index
+    let selected = `carts[${index}].selected` // 定义一个字符串   index是变量
+    this.setData({
+      [selected]:!this.data.carts[index].selected  
+     })
+     this.getTotalPrice()
+    //但凡carts数组中存在一条数据里面的selected不为true，全选按钮就不能勾选
+    let carts = this.data.carts
+    for (let i=0;i<carts.length;i++){
+      if(!carts[i].selected){
+        this.setData({
+          selectAllStatus:false
+        })
+        break;
+      }else{
+        this.setData({
+          selectAllStatus:true
+        })
+      }
+    }
+  },
+
+
+//计算总价格
+getTotalPrice(){
+  //拿到carts 数组中的每条selected 为true  单价乘以数量 
+  let carts = this.data.carts
+  let total = 0
+  for (let i = 0; i < carts.length; i++) {
+    if (carts[i].selected) {
+      total += carts[i].num * carts[i].price
+    }
+  }
+  this.setData({
+    totalPrice: total.toFixed(2) //取两位小数
+  })
+},
+
+
+
+
+
+
+
+
+
+
+
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -36,6 +108,7 @@ Page({
           { id: 2, title: '素米 500g', image: '/image/s6.png', num: 1, price: 0.03, selected: true }
         ]
       })
+      this.getTotalPrice()
     },1000)
 
   },

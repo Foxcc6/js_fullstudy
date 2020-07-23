@@ -4,7 +4,19 @@ Page({
   /**
    * 页面的初始数据
    */
+  changeMenu:
+    function (e){
+      console.log(e)
+      this.setData({
+        idname:e.currentTarget.id 
+      })
+      console.log(this.data.idname);
+      
+    },
+
+  
   data: {
+    idname:'guowei',
     category:[
       { name: '果味', id: 'guowei' },
       { name: '蔬菜', id: 'shucai' },
