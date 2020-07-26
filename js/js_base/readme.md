@@ -3,7 +3,7 @@
 
 引用类型:object,function,array,Regexp,Date
 
-使用typeof来判断数据类型,null不能被正确判断,而且只能判断基础数据类型
+使用typeof来判断数据类型,null不能被正确判断,而且只能判断基础数据类型，不能判断复杂类型
 
 使用instance of只能判断复杂数据类型
 
