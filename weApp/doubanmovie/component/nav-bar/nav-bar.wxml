@@ -1,0 +1,12 @@
+<!--component/nav-bar/nav-bar.wxml-->
+<view class="" hover-class="none" hover-stop-propagation="false">
+      <view class="" hover-class="none" hover-stop-propagation="false">
+          
+      </view>
+      <view class="container">
+          <view style="{{statusBarStytle}}"></view>
+          <view class="nav-bar" style="{{navBarStyle}}">
+              {{title}}
+          </view>  
+      </view>
+</view>
