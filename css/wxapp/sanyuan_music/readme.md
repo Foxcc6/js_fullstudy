@@ -1,0 +1,14 @@
+- 数据来源
+ 1. 有开源接口
+    - banner
+    - personalized
+
+
+ 2. 假数据
+    data:{
+        List:[
+            {
+                key:val,
+            }
+        ]
+    }
