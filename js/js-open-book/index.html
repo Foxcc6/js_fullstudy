@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            vertical-align: baseline;   /*高度不相同的容器对齐方式*/
+            -webkit-box-sizing: border-box; /*浏览器的兼容 谷歌*/
+            box-sizing: border-box;
+        }
+        html{
+            height: 100%;
+        }
+        body{
+            height: 100%;
+            overflow: hidden;
+            color: white;
+            -webkit-perspective: 1000;  /**/
+            perspective:1000;
+            background-color: #444444;
+            background-image:  -webkit-linear-gradient(top,#444444,#999999);
+        }
+        .book{
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -150px;
+            transform: rotateX(60deg); 
+            user-select: none;
+        }
+        .page{
+            width: 300px;
+            height: 300px;
+            padding: 1em;   /*相对父容器的字体大小*/
+            position: absolute;
+            left: 0;
+            top: 0;
+            text-indent: 2em;  /*文本首行缩进两个单位*/
+            overflow: hidden;
+        }
+        .front{
+            background-color: #d93e2b;
+        }
+        .back{
+            background-color: #fff;
+        }
+        .front-cover{
+            cursor: move;   /*鼠标挪上去变成十字架*/
+            transform: rotateY(180deg);
+            transform-origin: 0 50%;
+        }
+        .front-cover .back{
+            background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596174870890&di=db0ef52c92e3a7442b26e7ee701bb1ef&imgtype=0&src=http%3A%2F%2Fa-ssl.duitang.com%2Fuploads%2Fitem%2F201509%2F21%2F20150921115800_KdTcs.jpeg);
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            transform: translateZ(3px);
+        }
+        .book-cover .back{
+            transform: translateZ(-3px);
+        }
+        .p3d{
+            -webkit-transform-style:preserve-3d ;
+            transform-style:preserve-3d;
+        }
+        .flip{
+            transform: rotateY(180deg);
+        }
+        .shadow,
+        .dino{
+            width: 196px;
+            height: 132px;
+            position: absolute;
+            left: 60px;
+            top: 60px;
+            transform-origin:0 100% ;
+        }
+        .dino{
+            background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596175588942&di=7e107bef76aee8ae992e323cd2d9cb6a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201610%2F23%2F20161023064129_hNPzZ.jpeg);
+            background-size: cover;
+        }
+        .shadow{
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+  <div class="book p3d">
+    <div class="book-cover p3d">
+      <div class="page back flip"></div>
+      <div class="page front p3d">
+        <div class="shadow"></div>
+        <div class="dino"></div>
+      </div>
+    </div>
+    <div class="front-cover p3d">
+      <div class="page front flip p3d">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum nisl quis nulla eleifend dignissim.
+          Curabitur varius lobortis tincidunt. Maecenas gravida, nulla quis luctus imperdiet, ipsum nibh consectetur
+          ante, in sodales massa tortor eget neque. Donec porta ligula massa, id sagittis est. Ut nisl tellus, faucibus
+          nec feugiat ut, laoreet iaculis felis. Suspendisse ultrices mauris vel tellus suscipit commodo. Integer vitae
+          tortor erat. Pellentesque non tempor nisi.
+        </p>
+      </div>
+      <div class="page back"></div>
+    </div>
+  </div>
+  <script>
+      (function(window,document){
+        let prefixes = ['webkit','moz','ms','o'],
+        book = document.querySelectorAll('.book')[0],
+        page = document.querySelectorAll('.front-cover')[0],
+        dino = document.querySelectorAll('.dino')[0],
+        shadow = document.querySelectorAll('.shadow')[0],
+        centerPoint = window.innerWidth / 2,
+        hold = false,
+        clamp = function(val,min,max){
+         return Math.max(min,Math.min(val,max))
+
+        }
+        pageSize=300;
+
+        //摁下鼠标时候执行的事件
+        page.onmousedown = function(){
+            console.log('mousedown')
+            hold = true
+        }
+
+        //放开鼠标时候执行的事件
+        window.onmouseup = function(){
+            console.log('mouseup')
+            hold = false
+        }
+        // 在hold为true的时候做翻书的逻辑
+        // 鼠标移动时候执行的事件
+        window.onmousemove = function(evt){
+            console.log(evt)
+            if(!hold){
+                return
+            }
+            console.log(evt.pageX)
+            let angle = clamp((centerPoint - evt.pageX+pageSize)/pageSize*-90,-180,0),i,j
+            for(i = 0,j=prefixes.length;i<j;i++){
+                page.style[prefixes[i]+"Transform"] = 'rotateY('+angle+'deg)'
+            }
+        }
+      })(window,document)
+  </script>
+</body>
+</html>
