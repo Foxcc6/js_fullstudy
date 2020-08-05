@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .image-item{
+            display: block;
+            height: 300px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <img class="image-item" src="" lazyload="true"  data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596604217332&di=52d42bd89d95ada0d2a370095450e613&imgtype=0&src=http%3A%2F%2Fimg31.mtime.cn%2Fmg%2F2014%2F02%2F24%2F223601.45778138.jpg" alt="">
+    <img class="image-item" src="" lazyload="true"  data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596604111954&di=ea15a7ebba0879a7673d3b6d42e0819a&imgtype=0&src=http%3A%2F%2Fstatic.wanplus.com%2F2018%2F12%2F5%2F154400345600015.jpg" alt="">
+    <img class="image-item" src="" lazyload="true"  data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596604171442&di=b5500f3f0b838a1c2f206e65a6dc9097&imgtype=0&src=http%3A%2F%2Fd.paper.i4.cn%2Fmax%2F2014%2F01%2F12%2F1404202141897.jpg" alt="">
+    <img class="image-item" src="" lazyload="true"  data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596604111960&di=9bfb1c6cf34c14a35716f74a341b1127&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201811%2F27%2F20181127222029_RuU45.thumb.700_0.jpeg" alt="">
+    <img class="image-item" src="" lazyload="true"  data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596604290165&di=703f0529ac15fd897de01d473bfd1d77&imgtype=0&src=http%3A%2F%2F05.imgmini.eastday.com%2Fmobile%2F20180719%2F20180719235427_f74f73843ad9aec5da1957038cfcb8d0_3.jpeg" alt="">
+    <img class="image-item" src="" lazyload="true"  data-original="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1781471357,3292636644&fm=26&gp=0.jpg" alt="">
+    <img class="image-item" src="" lazyload="true"  data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596604290165&di=703f0529ac15fd897de01d473bfd1d77&imgtype=0&src=http%3A%2F%2F05.imgmini.eastday.com%2Fmobile%2F20180719%2F20180719235427_f74f73843ad9aec5da1957038cfcb8d0_3.jpeg" alt="">
+    <img class="image-item" src="" lazyload="true"  data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596604290165&di=703f0529ac15fd897de01d473bfd1d77&imgtype=0&src=http%3A%2F%2F05.imgmini.eastday.com%2Fmobile%2F20180719%2F20180719235427_f74f73843ad9aec5da1957038cfcb8d0_3.jpeg" alt="">
+    <img class="image-item" src="" lazyload="true"  data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596604290165&di=703f0529ac15fd897de01d473bfd1d77&imgtype=0&src=http%3A%2F%2F05.imgmini.eastday.com%2Fmobile%2F20180719%2F20180719235427_f74f73843ad9aec5da1957038cfcb8d0_3.jpeg" alt="">
+    <img class="image-item" src="" lazyload="true"  data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596604111962&di=3b3195b97482ad4c2aa8094cb0d07259&imgtype=0&src=http%3A%2F%2Fwww.longzhidui.com%2Fuploads%2F2016041405%2F20160414054429147556.jpg" alt="">
+    <script>
+        //可视区域的高度
+        let viewHeight =document.documentElement.clientHeight
+        console.log(viewHeight)
+
+        function lazyload(){
+            let eles = document.querySelectorAll('img[data-original][lazyload]')
+            // console.log(eles)
+            // 判断每一个img是否出现在可视区域内
+        //    eles.forEach((item)=>{
+        //        console.log(item)
+              Array.prototype.forEach.call(eles,function(item,index){
+        //       console.log(item)
+                let rect;
+                rect = item.getBoundingClientRect()//用于获取页面上某个元素的左上右下分别相对于浏览器视窗的位置
+                console.log(rect)
+                if(rect.bottom >=0 && rect.top<viewHeight){ //在可视区域内
+                    !function(){
+                        let img = new Image()
+                        img.src = item.dataset.original
+                        img.onload = function(){
+                            item.src = img.src
+                        }
+                        item.removeAttribute('data-original') //移除属性 ，下次不再加载
+                        item.removeAttribute('lazyload')
+                    }()
+                }
+                
+           })
+        }
+        lazyload()
+        document.addEventListener('scroll',lazyload)
+    </script>
+</body>
+</html>
