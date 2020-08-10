@@ -8,3 +8,6 @@
     bindtap="gotoDetail"
   />
 </block>
+<view class="m30">
+  <van-button block type ="primary" bindtap="uploadAvatar"> 上传照片</van-button>
+</view>

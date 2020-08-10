@@ -154,3 +154,7 @@ page {
   line-height: 36rpx;
   word-break: break-all;
 }
+.m30{
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
