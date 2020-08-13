@@ -30,3 +30,4 @@
   .new-item:hover{
     box-shadow: none;
   }
+ 
