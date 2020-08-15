@@ -1,5 +1,3 @@
-
-
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 const env = 'oracle-cc-kip8w'

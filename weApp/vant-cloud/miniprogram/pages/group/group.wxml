@@ -1,2 +1,19 @@
-<!--miniprogram/pages/group/group.wxml-->
-<text>miniprogram/pages/group/group.wxml</text>
+<view class="group-body">
+    <view class="public-list">
+        <view class="public-header">
+            <view class="public-icon">
+                <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
+            </view>
+           我的群组
+        </view>
+        <view class="pulic-item" wx:for="{{groupList}}" wx:key="index">
+            <view class="public-item-name">{{item.name}}</view>
+            <view>
+                <image class="" src=""></image>
+                <van-icon name="arrow"  style="color:#c6c6c6"/>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- <van-cell title="我的群组" icon= size="large" />
+ <van-cell title="单元格" value="内容" size="large" label="描述信息" /> -->
