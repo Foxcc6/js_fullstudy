@@ -44,3 +44,6 @@ var obj = {
     foo:foo
 }
 obj.foo()  //foo此刻被OBJ所拥有或者包含
+
+
+
