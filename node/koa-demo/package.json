@@ -16,6 +16,7 @@
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",
     "koa-router": "^9.4.0",
+    "koa-static": "^5.0.0",
     "route": "^0.2.5"
   }
 }

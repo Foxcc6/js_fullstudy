@@ -24,5 +24,6 @@ app.use(router.get('/',main))
 
 app.listen(3000)
 // app.use(main)
+// 区分客户端请求的是哪个接口  路由
 
 

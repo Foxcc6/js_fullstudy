@@ -1,5 +1,5 @@
 const Koa = require ('koa');
-const compose = require('koa-compose');
+const compose = require('koa-compose'); //中间件调用简洁一些
 const app = new Koa()
 
 const logger = (ctx,next) =>{
