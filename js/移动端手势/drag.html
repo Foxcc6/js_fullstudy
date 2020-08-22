@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100vw;
+            height: 50vh;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">h2</div>
+</body>
+<script>
+    const box = document.querySelector('.box');
+    box.addEventListener('mousedown', (e) => {
+        let startX = e.clientX, startY = e.clientY
+        function handleMove(event) {
+            // 前提 已经 down
+            // box.style.transform = 
+            // `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+            
+            let endX = event.clientX, endY = event.clientY
+            let diffX = endX - startX, diffY = endY - startY
+            // 移动10px
+            if (diffX ** 2 + diffY ** 2 > 10000) {
+                console.log('pan 发生了')
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    if (diffX > 0) {
+                        console.log('pan right')
+                    }
+                    else {
+                        console.log('pan left')
+                    }
+                }
+            }
+        }
+
+        function handleUp() {
+        document.removeEventListener('mousemove', handleMove)
+        document.removeEventListener('mouseup', handleUp)
+    }
+        // box.addEventListener('mousemove', xxxx)
+        document.addEventListener('mousemove', handleMove)
+        document.addEventListener('mouseup', handleUp)
+    })
+
+
+
+
+
+
+</script>
+
+
+</html>
