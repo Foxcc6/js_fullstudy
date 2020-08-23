@@ -5,4 +5,4 @@ serverless
 - wx.cloud.database()
 - db.collection('production')
 - productsCollection.get()
-- 微信云开发
+- 微信云开发 数据库导入
