@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.common.dev.js"></script>
     <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+        [v-cloak]{
+            display: none;
+        }
+    </style>
 </head>
 <body>
      <div id="app"> 
@@ -14,8 +22,8 @@
             <p>{{item.name}}-{{item.age}}</p>
         </div> -->
 
-        <div class="msg">
-            <span>{{message}}</span></br>
+        <!-- <div class="msg"> -->
+            <!-- <span>{{message}}</span></br>
             <span v-text="message"></span>
             <span v-html="newMessage"></span>
         </div>
@@ -25,7 +33,30 @@
             <p>{{count}}</p>
             <button v-on:click="add">+</button>
             <button @click="reduce">-</button>
-        </div>
+        </div> -->
+
+        <!-- <div class="model">
+            <p>{{message}}</p>
+            <p>
+                v-model:
+            <input type="text" v-model="message"/>
+            </p>
+        </div> -->
+
+
+        <!-- <div class="pic">
+            <img v-bind:src="imgSrc" alt="">
+        </div> -->
+
+
+        <!-- <div @click="changeColor" v-bind:class="{red:isRed}" :class="[className1,className2]">明国很腼腆</div> -->
+
+        <!-- <div v-pre>{{message}}</div> -->
+
+        <!-- <div v-cloak>{{message}}</div>   -->
+
+        <div v-once>{{message}}</div>
+        <input type="text" v-model="message"/>
     </div> 
 
    
@@ -36,9 +67,13 @@
         var app = new Vue({
             el:'#app',
             data:{
+                className1:'active',
+                className2:'wrapper',
+                isRed:false,
                 count:0,
                 message:'hello world',
                 newMessage:'<h2>hello Vue!</h2>',
+                imgSrc:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2173461881,2651646175&fm=26&gp=0.jpg',
                 isSure:'true',
                 list:['a','b','c','d'],
                 people:[
@@ -62,6 +97,10 @@
                 },
                 reduce(){
                     this.count--
+                },
+                changeColor(){
+                   this.isRed=!this.isRed;
+                    
                 }
             },
 
