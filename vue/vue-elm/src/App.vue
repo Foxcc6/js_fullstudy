@@ -14,7 +14,6 @@ export default {
   data() {
     return {
       seller: {
-        id:qs.parse(localtion.search).id
       }
     }
   },
@@ -24,7 +23,7 @@ export default {
   methods:{
     _getSeller(){
       getSeller({
-        id:this.seller.id
+        id: this.seller.id
       }).then((seller)=> {
         console.log('sdas');
       })
