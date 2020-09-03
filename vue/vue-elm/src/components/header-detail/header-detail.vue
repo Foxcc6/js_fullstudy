@@ -50,7 +50,10 @@ export default {
       SupportIco
   },
   data() {
-      visible:false
+      return{
+        visible:false
+      }
+    
   },
   methods:{
       hide(){
