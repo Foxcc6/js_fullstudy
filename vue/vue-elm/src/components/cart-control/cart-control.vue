@@ -1,23 +1,34 @@
 <template>
   <div class="cart-control">
       <transition name="move">
-          <div class="cart-decrease"  @click.stop="decrease">
+          <div class="cart-decrease" v-show="food.count>0" @click.stop="decrease">
           <span class="inner icon-remove_circle_outline"></span>
       </div>
       </transition>
-      <div class="cart-count">12</div>
+      <div class="cart-count">{{food.count}}</div>
       <div class="cart-add icon-add_circle" @click.stop="add"></div>
   </div> 
 </template>
 
 <script>
 export default {
+    props:{
+        food:{
+            type: Object
+        }
+    },
     methods:{
         decrease() {
 
         },
         add() {
-
+            console.log(123);
+            
+            if (!this.food.count) {
+                this.$set(this.food,'count',1)
+            }else {
+                this.food.count++
+            }
         }
 
     }
