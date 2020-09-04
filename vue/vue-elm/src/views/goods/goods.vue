@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="scroll-nav-wrapper">
       <!-- 左右联动的菜单-->
-      <cube-scroll-nav :side="true" :data="goods" :options="scrollOptions">
+      <cube-scroll-nav :side="true" :data="goods" :options="scrollOptions" v-if="goods.length">
         <!-- 左侧菜单栏-->
         <template slot="bar" slot-scope="props">
           <cube-scroll-nav-bar
@@ -43,13 +43,16 @@
                       <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
                   <div class="cart-control-wrapper">
-                    <cart-control :food="food"></cart-control>
+                    <cart-control :food="food" @add="onAdd"></cart-control>
                   </div>
               </div>
             </li>
           </ul>
         </cube-scroll-nav-panel>
       </cube-scroll-nav>
+    </div>
+    <div class="shop-cart-wrapper">
+      <shop-cart :select-foods="selectFoods" :delivery-price="data.deliveryPrice"></shop-cart>
     </div>
   </div>
 </template>
@@ -58,12 +61,15 @@
 import SupportIco from "@/components/support-ico/support-ico";
 import  {getGoods} from '@/api'
 import CartControl from '@/components/cart-control/cart-control'
+import ShopCart from '@/components/shop-cart/shop-cart'
 export default {
   props: {
       data:{
           type:Object,
           default() {
-              return {}
+              return {
+
+              }
           }
       }
   },
@@ -71,7 +77,7 @@ export default {
       return{
         goods:[],
         scrollOptions:{
-            click: false,
+            click: true,
             directionLockThreshold: 0
         }
       }
@@ -89,6 +95,17 @@ computed:{
             })
         }) 
         return ret
+    },
+    selectFoods() {
+      let foods = []
+      this.goods.forEach((good)=>{
+        good.foods.forEach((food)=>{
+          if(food.count) {
+              foods.push(food)
+          }
+        })
+      }) 
+      return foods
     }
 },
 
@@ -96,6 +113,9 @@ computed:{
        this._getGoods()
   },
   methods:{
+    onAdd(target) {
+        //小球下落
+    },
       _getGoods() {
           getGoods({
               id:this.data.id
@@ -107,7 +127,8 @@ computed:{
 
   components: {
     SupportIco,
-    CartControl
+    CartControl,
+    ShopCart
   }
 };
 </script>
