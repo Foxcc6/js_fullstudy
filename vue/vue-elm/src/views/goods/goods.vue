@@ -52,7 +52,11 @@
       </cube-scroll-nav>
     </div>
     <div class="shop-cart-wrapper">
-      <shop-cart :select-foods="selectFoods" :delivery-price="data.deliveryPrice"></shop-cart>
+      <shop-cart 
+      ref="shopCart"
+      :select-foods="selectFoods" 
+      :delivery-price="data.deliveryPrice"
+      :min-price="data.minPrice"></shop-cart>
     </div>
   </div>
 </template>
@@ -115,6 +119,7 @@ computed:{
   methods:{
     onAdd(target) {
         //小球下落
+       this.$refs.shopCart.drop(target)
     },
       _getGoods() {
           getGoods({
