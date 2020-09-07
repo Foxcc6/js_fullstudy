@@ -22,8 +22,16 @@ const mutations = {
     }
 }
 
+const actions = {   //提交mutations里面的方法
+    addAction(context) {
+        context.commit('add')
+    }
+}
+
+
 export default new Vuex.Store({
     state,
     mutations,
-    getters
+    getters,
+    actions
 })
