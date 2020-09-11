@@ -4,12 +4,33 @@
           <searchBox @query="onQueryChange"></searchBox>
       </div>
       <!--热搜-->
-      <div class="shortcut-wrapper" ref="shortcutWrapper">
-        <scroll>
+      <div class="shortcut-wrapper" ref="shortcutWrapper" v-show="!query">
+        <scroll class="shortcut" ref="shortcut">
          <div>
-           12354564
+           <div class="hot-key">
+             <h1 class="title">热门搜索</h1>
+             <ul>
+               <li class="item" v-for="(item,index) in hotKey" :key="index">
+                 <span>{{item.first}}</span>
+               </li>
+             </ul>
+           </div>
+           <div class="search-history" v-show="searchHistory.length">
+             <h1 class="title">
+               <span class="text">搜索历史</span>
+               <span class="clear" @click="clearSearchHistory">
+                 <i class="iconfont">&#xe63b;</i>
+               </span>
+             </h1>
+             <!--历史列表-->
+            <searchList :searches="searchHistory" @delete="deleteSearchHistory"></searchList>
+           </div>
          </div>
         </scroll>
+      </div>
+       <!--热搜结果列表-->
+      <div class="search-result" ref="searchResult" v-show="query">
+        <searchResult :query="query" @select="saveSearch"></searchResult>
       </div>
   </div>
 </template>
@@ -18,15 +39,56 @@
 import searchBox from '@/components/searchBox' 
 import { searchMixin }  from '@/common/js/mixin'
 import scroll from '@/components/scroll'
+import api from '@/api'
+import searchList from '@/components/searchList'
+import {mapGetters,mapActions } from 'vuex'
+import searchResult from '@/components/searchResult'
 
 export default {
     components:{
         searchBox,
-        scroll
+        scroll,
+        searchList,
+        searchResult
     },
     mixins: [searchMixin],
+    data() {
+      return {
+        hotKey:[],
+      }
+    },
+    computed: {
+    ...mapGetters(['searchHistory'])
+  },
+    created() {
+      this. _getHotKey()
+    },
     methods:{
-      
+      _getHotKey () {   // 获取热门搜索
+      api.HotSearchKey().then((res)=>{
+        this.hotKey = res.data.result.hots.slice(0,10)
+        
+      })
+      },
+
+
+      ...mapActions(['deleteSearchHistory','clearSearchHistory','saveSearchHistory']),
+
+      saveSearch(){
+        //保存历史记录
+      this.saveSearchHistory(this.query)
+      },
+
+    
+    },
+    watch:{
+      query(newQuery) {
+        if(newQuery) {
+          setTimeout(() => {
+            this.$refs.shortcut.refresh()
+          }, 20);
+        }
+      }
     }
 }
 </script>
@@ -77,7 +139,7 @@ export default {
           
           .clear 
             // extend-click()
-            .icon 
+            .iconfont 
               font-size 18px
               color hsla(0,0%,100%,.3)
             

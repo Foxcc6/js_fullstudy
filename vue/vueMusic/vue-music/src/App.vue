@@ -32,12 +32,12 @@ export default {
 <style lang="stylus">
 @font-face {
   font-family: 'iconfont';  /* project id 2052915 */
-  src: url('//at.alicdn.com/t/font_2052915_qfcub9o8kc.eot');
-  src: url('//at.alicdn.com/t/font_2052915_qfcub9o8kc.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_2052915_qfcub9o8kc.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_2052915_qfcub9o8kc.woff') format('woff'),
-  url('//at.alicdn.com/t/font_2052915_qfcub9o8kc.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_2052915_qfcub9o8kc.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.eot');
+  src: url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.woff') format('woff'),
+  url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.svg#iconfont') format('svg');
 }
 .iconfont{
     font-family:"iconfont" !important;
