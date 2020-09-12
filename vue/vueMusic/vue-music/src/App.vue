@@ -10,6 +10,8 @@
     <keep-alive>
       <router-view/>
     </keep-alive>
+    <!-- 播放页面 -->
+    <play></play>
 
     <!-- menu -->
     <sideBar></sideBar>
@@ -20,11 +22,14 @@
 import Header from '@/components/header'
 import sideBar from '@/components/sideBar'
 import tab from '@/components/tab'
+import play from '@/components/play'
+
 export default {
     components:{
       Header,
       sideBar,
-      tab
+      tab,
+      play
     }
 }
 </script>
