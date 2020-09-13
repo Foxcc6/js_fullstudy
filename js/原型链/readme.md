@@ -12,5 +12,5 @@
 
 3. 绝大多数对象的最终都会继承自 object.prototype
 
-var obj2 = Object.create(null)
+除了  var obj2 = Object.create(null)    这个以外
 
