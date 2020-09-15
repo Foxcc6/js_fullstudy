@@ -1,9 +1,13 @@
 <template>
   <div class="star-login">
-    <h1>登录</h1>
-    <div class="login-wrapper">
+    <h1>注册</h1>
+    <div class="login-wraper">
       <div class="avatar" :style="`background-image:url(${avatar})`"></div>
       <div class="input-group">
+        <label for="nickname">昵称</label>
+        <input type="text" id="nickname" v-model="nickname" />
+      </div>
+      <div class="input-group input-group-panel">
         <label for="username">账号</label>
         <input type="text" id="username" v-model="username" />
       </div>
@@ -11,57 +15,64 @@
         <label for="userpwd">密码</label>
         <input type="password" id="userpwd" v-model="userpwd" />
       </div>
-      <p class="forgot-pwd">忘记密码</p>
-      <div class="sign" @click="login">登录</div>
+      <div class="sign" @click="register">注册</div>
+      <span class="badge-img">+</span>
     </div>
-    <p class="register" @click="register">新用户？点击这里注册</p>
+    <p class="register" @click="login">已经有账号了？点击登录</p>
   </div>
 </template>
 
 
 <script>
 export default {
+  name: "StarLogin",
   data() {
     return {
+      avatar: require("../assets/img/raw_1512446162.png"),
+      nickname: "",
       username: "",
-      userpwd: "",
-      avatar: require("../assets/img/raw_1512446140.jpeg")
+      userpwd: ""
     };
   },
   methods: {
     register() {
-      this.$router.push({ path: "/StarRegister" });
+        if (this.nickname.trim() == ''|| this.nickname.trim() == null) {
+            this.$toast('请输入昵称')
+            return
+        }
+          if (this.username.trim() == ''|| this.username.trim() == null) {
+            this.$toast('请输入账号')
+            return
+        }
+          if (this.userpwd.trim() == ''|| this.userpwd.trim() == null) {
+            this.$toast('请输入密码')
+            return
+        }
+        this.$http({
+            method:'post',
+            url:this.$util.baseUrl+'/users/userRegister',
+            data:{
+                nickname:this.nickname.trim(),
+                username:this.username.trim(),
+                userpwd:this.userpwd.trim()
+            }
+        }).then((res)=>{
+            if(res.data.code === "80000"){
+                this.$router.push({ path: "/StarLogin" });
+                this.$toast(res.data.mess)
+                
+            }else{
+                 this.$toast(res.data.mess)
+            }
+        })
     },
     login() {
-      if (this.username.trim() == "" || this.username.trim() == null) {
-        this.$toast("请输入账号");
-        return;
-      }
-      if (this.userpwd.trim() == "" || this.userpwd.trim() == null) {
-        this.$toast("请输入密码");
-        return;
-      }
-      this.$http({
-        method:'post',
-        url:this.$util.baseUrl+'/users/userLogin',
-        data:{
-           username:this.username.trim(),
-           userpwd:this.userpwd.trim()
-        }
-      }).then((res)=>{
-        if(res.data.code === '80000'){
-          // 拿到后端返回的用户信息(用户名和昵称)存到本地
-          // 跳转首页
-        }else {
-          this.$toast(res.data.mess)
-        }
-      }).catch((err)=>{
-        console.log(err); 
-      })
+      this.$router.push({ path: "/StarLogin" });
     }
   }
 };
 </script>
+
 
 <style lang="less" scoped>
 input {
@@ -77,7 +88,6 @@ input {
   box-sizing: border-box;
   h1 {
     margin-top: 1.12rem;
-    margin-bottom: 1rem;
     height: 0.693333rem;
     line-height: 0.693333rem;
     color: rgba(16, 16, 16, 1);
@@ -85,15 +95,15 @@ input {
     text-align: center;
     font-family: Arial;
   }
-  .login-wrapper {
+  .login-wraper {
     width: 7.44rem;
-    height: 10.773333rem;
+    height: 11.413333rem;
     margin-top: 1.706667rem;
     border-radius: 0.266667rem;
     box-shadow: 0 0 0.533333rem 0 rgba(170, 170, 170, 1);
     border: 1px solid rgba(187, 187, 187, 1);
+    position: relative;
     overflow: hidden;
-    margin: 0 auto;
     .avatar {
       width: 2.4rem;
       height: 2.4rem;
@@ -102,6 +112,16 @@ input {
       background-position: center;
       background-repeat: no-repeat;
       background-size: 100% 100%;
+    }
+    .badge-img {
+      position: absolute;
+      width: 1.2rem;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      left: 4.266667rem;
+      top: 2.453333rem;
+      color: rgba(16, 16, 16, 0.5);
+      text-align: center;
     }
     .input-group {
       width: 5.546667rem;
@@ -133,17 +153,8 @@ input {
     .input-group-panel {
       margin-top: 10px;
     }
-    .forgot-pwd {
-      margin: 10px auto 0.56rem 1.973333rem;
-      height: 0.613333rem;
-      line-height: 0.453333rem;
-      opacity: 0.3;
-      color: rgba(16, 16, 16, 1);
-      font-size: 0.32rem;
-      font-family: Arial;
-    }
     .sign {
-      margin: 0 auto;
+      margin: 0.8rem auto 0;
       width: 5.546667rem;
       height: 1.226667rem;
       line-height: 1.226667rem;
@@ -159,7 +170,7 @@ input {
   }
   .register {
     height: 0.613333rem;
-    margin-top: 2.16rem;
+    margin-top: 1.52rem;
     line-height: 0.613333rem;
     opacity: 0.3;
     color: rgba(16, 16, 16, 1);
