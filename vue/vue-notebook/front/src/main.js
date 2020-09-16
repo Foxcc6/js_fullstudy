@@ -8,8 +8,8 @@ import 'vant/lib/index.css';
 import { Swipe, SwipeItem, Icon, Field, ActionSheet, Toast, Panel, Uploader } from 'vant';
 import axios from 'axios'
 import util from './assets/js/util'
-
-Vue.use(Swipe).use(SwipeItem).use(Icon).use(Field).use(ActionSheet).use(Toast).use(Panel).use(Uploader).use(axios)
+Vue.prototype.axios = axios
+Vue.use(Swipe).use(SwipeItem).use(Icon).use(Field).use(ActionSheet).use(Toast).use(Panel).use(Uploader)
 
 Vue.prototype.$http = axios
 Vue.prototype.$util = util
