@@ -18,8 +18,14 @@ let stack = [
     } 
 ]
 function emitToken(token) {
+    token = {
+        ...token,
+        children:[],
+        nodeType:'element'
+    }
         if(token.type === 'startTag'){
             stack.push(token);
+            top.children.push(token)
         }else {
             if (top.tagName === token.tagName){
                 stack.pop();
@@ -69,3 +75,14 @@ function parseDom(html) {
   }
 }
 parseDom(response);
+
+function replacer(key, value) {
+    if (typeof value === "string") {
+      return undefined;
+    }
+    return value;
+  }
+  
+  var foo = {foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7};
+  var jsonString = JSON.stringify(foo, replacer);
+  
