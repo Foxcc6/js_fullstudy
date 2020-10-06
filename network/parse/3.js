@@ -1,41 +1,63 @@
 let response = `
 <html>
-<head></head>
+<head>
+<style>
+#myid{
+  width:500px;
+  display: flex;
+  background-color: rgb(0, 0, 255);
+  align-items: center;
+  height: 500px;
+  justify-content: center;
+  flex-direction: row;
+}
+.cls1 {
+  width: 200px;
+  height: 100px;
+  background-color: rgb(255, 0, 0);
+}
+.cls2 {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(0, 255, 0);
+}
+</style>
+</head>
 <body>
-  <div></div>
+  <div id="myid">
+   <div class="cls1"></div>
+   <div class="cls2"></div>
+  </div>
 </body>
 </html>
 `
 // 解析成 DOM 树
-// 分词(词法分析)(FSM) -> 语法分析(LL,LR) -> AST(抽象语法树)(DOM树)
+// 分词(词法分析)(FSM) -> 语法分析(LL , LR) -> AST(抽象语法树)(DOM树)
 // 我 今天 很 高兴
+// {person: '我'， time: '今天'，mood: '很高兴'}
 // var
 // 拿出标签名（开始 结束）
 let currentToken = null;
 let stack = [
-    {
-        type:'document',children:[]
-    } 
+  {type: 'document', children: []}
 ]
 function emitToken(token) {
-    token = {
-        ...token,
-        children:[],
-        nodeType:'element'
+  token = {
+    ...token,
+    children: [],
+    nodeType: 'element'
+  }
+  let top = stack[stack.length - 1];
+  if (token.type === 'startTag') {
+    stack.push(token);
+    top.children.push(token);
+  } else {
+    if (top.tagName === token.tagName) {
+      stack.pop();
     }
-        if(token.type === 'startTag'){
-            stack.push(token);
-            top.children.push(token)
-        }else {
-            if (top.tagName === token.tagName){
-                stack.pop();
-            }
-        }
+  }
 }
-
-
 function data(c) {
-
   if (c === '<') {
     return tagOpen
   }
@@ -57,32 +79,35 @@ function tagOpen(c) {
   }
   
 }
-// <  tagOpen  tagName >
+// <  tagOpen  tagName key="value" key="value" >
 function tagName(c) {
   if (c.match(/[a-z]/)) {
     currentToken.tagName += c;
     return tagName;
   } else if (c === '>') {
-    console.log(currentToken);
+    // console.log(currentToken);
+    emitToken(currentToken);
     return data;
+  } else if (c.match(/[\t\n\f ]/)) {
+    return attrName
   }
   // else if (c === '/')
+}
+function attrName(c) {
+  if (c.match(/[a-z]/)) {
+    
+  }
 }
 function parseDom(html) {
   let state = data;
   for (let c of html) {
     state = state(c);
+    // state = data()   => tagOpen
+    // state = tagOpen
   }
 }
 parseDom(response);
+// css 选择器 和 哪个元素 匹配
+// .cls1 #myid div {} 从后往前
 
-function replacer(key, value) {
-    if (typeof value === "string") {
-      return undefined;
-    }
-    return value;
-  }
-  
-  var foo = {foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7};
-  var jsonString = JSON.stringify(foo, replacer);
-  
+console.log(JSON.stringify(stack, null, 2))
