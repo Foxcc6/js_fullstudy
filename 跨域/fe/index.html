@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/0.10.0/vue.js"></script>
+
+    <script>
+        function foo(data){
+            console.log('接收到后端返回的数据了',data);       
+        }
+    </script>
+     foo({code:0})-->
+   <!-- <script src="http://127.0.0.1:8088/api"></script> --> 
+
+
+    <script>
+        function jsonp({url, timeout}) {
+            return new Promise((resolve,reject)=>{
+                //数据
+                // 为了保证每个请求方法名唯一
+                let methodName = `jsonCallback${Date.now()}`
+                window[methodName] = function (data) {
+                    resolve(data)
+                }
+                // 请求
+                const scriptNode = document.createElement('script')
+                scriptNode.src = url + '?callback=' + methodName
+                document.body.appendChild(scriptNode)
+                
+                setTimeout(()=>{
+                    reject()
+                },5000)
+            })
+        }
+        jsonp({url:'http://127.0.0.1:8088/api'})
+        .then(res =>{
+            console.log('结果',res);
+            
+        })
+    </script>
+</body>
+</html>
