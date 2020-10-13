@@ -1,0 +1,67 @@
+<script>
+	// repeat 实现，使用JS实现一个repeat方法，
+	// 调用这个 repeatedFunc("hellworld")，
+	// 会alert4次 helloworld, 每次间隔3秒
+	// function repeat(func, times, wait) {
+
+	// }
+	// const repeatFunc = repeat(alert, 4, 3000)
+	// repeatedFunc("hellworld")
+
+
+	// 函数是一等公民：函数和其他类型(bool,string,number)一样
+	// 都可以作为函数的参数传递，也可以作为函数的返回值返回
+	// 高阶函数
+
+	function repeat(func, times, wait) {
+		return (args) => {
+			for (let i = 0; i < times; i++) {
+				setTimeout(() => {
+					func(args)
+				}, i * wait);
+			}
+		}
+	}
+	const repeatFunc = repeat(alert, 4, 3000)
+	repeatFunc("hellworld")
+
+	// foreach map filter reduce
+	// map的使用方法 能不能自己写一个map呢
+	Array.prototype.map = function (func) {
+		// 1.遍历
+		// 2.每一项操作一下
+		// 3.返回新数组
+		let newArr = []
+		let arr = this
+		for (let i = 0; i < arr.length; i++) {
+			let num = arr[i]
+			newArr.push(func(num, i, arr))
+		}
+		return newArr
+
+	}
+	let a = [1, 2, 3]
+	let s = a.map(x = x + 1) // [2,3,4]
+
+	//////////////////////////////////
+	function readFile(fn) {
+		setTimeout(() => {
+			fn('ok')
+		}, 3000)
+	}
+	readFile((c) => {
+		console.log(c); //3s输出一个OK
+
+	})
+
+// f('ok')
+// CORS 设置 CORS 的头部字段
+// Access-control-allow-origin : baidu.com | *
+// Access-control-allow-method
+// Access-control-allow-headers
+
+app.get('/',(ctx)=>{
+	ctx()
+}
+)
+</script>
