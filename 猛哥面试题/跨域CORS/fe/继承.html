@@ -1,0 +1,41 @@
+<script>
+// 题目
+//填充 inherit 完成输出。
+//继承？
+function inherit(constructor,propsObj) {
+    function F(name) {
+        constructor.call(this,name)
+    }
+    // 给自身加了个prototype
+    F.prototype = propsObj
+    // 继承过来的方法
+    F.prototype.__proto__ = constructor.prototype
+    return F
+}
+
+let animalNum = 0;
+function Animal(name) {
+  animalNum ++;
+  this.name = name;
+}
+Animal.prototype.getName = function() {
+  return this.name;
+};
+const Cat = inherit(Animal, {  
+    say:function() {
+        console.log(`NO${animalNum}:${this.getName()}`);
+    }
+});
+const cat1 = new Cat('小花');
+cat1.say(); // NO1:小花
+
+
+
+function Dog() {}
+function Bar() {
+    Dog.call(this)
+}
+// Bar 继承 Dog
+// Bar.prototype = Object.create(Dog.prototype)
+ Bar.prototype.__proto__ = Dog.prototype
+</script>
