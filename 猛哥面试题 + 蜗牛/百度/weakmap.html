@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- key:value -->
+    <!-- weakMap:key 一定是对象 -->
+    <script>
+        // 强引用
+        // 弱引用
+        let obj = {
+            a:'A'
+        } // 有obj 引用着它 不会被销毁
+        let wm = new WeakMap();
+        wm.set(obj,'A')  // 这次引用不算数  垃圾回收不会考虑
+        obj = null
+        console.log(wm); // 不在   不能枚举的
+
+
+        function foo() {
+            let obj2 = {}
+            wm.set(obj2,'B')
+        }
+        foo()
+        console.log(wm);
+    </script>
+</body>
+</html>
