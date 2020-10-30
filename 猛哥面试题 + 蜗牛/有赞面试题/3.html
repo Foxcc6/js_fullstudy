@@ -1,0 +1,41 @@
+<script>
+    let p = (t) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(t);
+            }, t)
+        })
+    }
+
+    //let p3=4 = Promise.resolve()
+    let p3 = Promise.reject('') //
+    let arr = [p(1000), p(2000),p3];
+
+    console.time('a')
+    Promise.all(arr).then(r => {
+        console.timeEnd('a')
+        console.log(r)
+    });
+
+    Promise.allSettled(arr).then(r =>{
+        console.log('-----',r);  
+    }) //状态改变
+
+    console.time('a1')
+    Promise.race(arr).then(r => {
+        console.timeEnd('a1')
+        console.log(r)
+    });
+
+// 都接受数组，ALL是等所有的promise都成功,race是以最快的那个promise状态为准
+// promise 三种状态
+// 1.初始化，状态：pending
+
+// 2.当调用resolve(成功)，状态：pengding=>fulfilled
+// ​
+// 3.当调用reject(失败)，状态：pending=>rejected
+
+
+// async await 优势没有一大堆的PROMISE的.then链式调用
+    
+</script>
