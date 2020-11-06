@@ -1,0 +1,15 @@
+<script>
+    // 栈 后进先出
+    let a = [1, 2, 3, [4, [5, [6]]]]
+    function flat(a) {
+        let stack = [...a],res=[]
+        while(stack.length){
+            let item = stack.pop()
+            if(Array.isArray(item)){
+                stack.push(...item)
+            }else{
+                res.unshift(item)
+            }
+        }
+    }
+</script>
