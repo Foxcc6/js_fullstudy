@@ -1,0 +1,44 @@
+<script>
+    // var levelOrder = function(root){
+    //     // root.left
+    //     // root.right 
+    //     // root.left.left
+    //     // root.left.right
+    //     if(!root) return []
+    //     let queue = [root],res=[];
+    //     while(queue.length){
+    //         // 一行
+    //         let rowNodes = queue.splice(0)
+    //         let row = []
+    //         for(let node of rowNodes){
+    //             res.push(node.val)
+    //             if(node.left) queue.push(node.left)
+    //             if (node.right) queue.push(node.right)
+    //         }
+    //         res.push(row)
+    //     }
+    //         return res
+    // }
+    var levelOrder = function (root) {
+        if (!root) return []
+        let queue = [root], res = []
+        while (queue.length) {
+            // 一行
+            let rowNodes = queue.splice(0)
+            let row = []
+            for (let node of rowNodes) {
+                row.push(node.val)
+                if (node.left) queue.push(node.left)
+                if (node.right) queue.push(node.right)
+            }
+            res.push(row)
+        }
+        return res
+    };
+
+
+</script>
+<!-- 
+    模板
+    let
+-->
