@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div id="app">
         123
@@ -13,22 +15,50 @@
 
     <script>
         // 节流是在规定的时间内只触发一次
-        function throttle(fn,delay) {
-        // 利用闭包保存时间
-        let prev = Date.now()
-        return function() {
-            let now = Date.now()
-            if (now-prev >= delay) {
-                fn.call(this,arguments)
-                prev = Date.now()
+        function throttle(fn, delay) {
+            // 利用闭包保存时间
+            let prev = Date.now()
+            return function () {
+                let now = Date.now()
+                if (now - prev >= delay) {
+                    fn.call(this, arguments)
+                    prev = Date.now()
+                }
             }
-        }    
         }
-        document.getElementById('app').addEventListener('click',throttle(fn,2000))
-        function fn(){
+        document.getElementById('app').addEventListener('click', throttle(fn, 2000))
+        function fn() {
             console.log('节流');
-            
+
+        }
+
+
+
+        // 第二种方法 定时器
+        function throttle(fn) {
+            let timeout;
+            return function () {
+                if (!timeout) {
+                    timeout = setTimeout(() => {
+                        fn();
+                        timeout = null
+                    }, 2000)
+                }
+            }
+        }
+
+        //  防抖
+        function debounce(fn) {
+            let timeout;
+            return function () {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    fn();
+                }, 2000)
+
+            }
         }
     </script>
 </body>
+
 </html>
