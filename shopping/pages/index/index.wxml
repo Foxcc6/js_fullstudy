@@ -5,7 +5,7 @@
   <view class="index_swiper">
     <swiper autoplay="{{true}}" indicator-dots="true" circular="true">
       <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
-        <navigator class="">
+        <navigator url="/pages/goods_detail/index?goods_id=395">
           <image class="" src="{{item.image_src}}" mode="widthFix"></image>
         </navigator>
       </swiper-item>
@@ -13,7 +13,7 @@
   </view>
   <!-- 导航开始 -->
   <view class="index_cate">
-    <navigator target="" url="" wx:for="{{catesList}}" wx:key="name">
+    <navigator  url="/pages/category/category"  open-type="switchTab" wx:for="{{catesList}}" wx:key="name">
       <image src="{{item.image_src}}" mode="widthFix"></image>
     </navigator>
   </view>
@@ -27,7 +27,7 @@
       </view>
       <!-- 内容 -->
       <view class="floor_list">
-        <navigator class="list_item" wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2" wx:key="name">
+        <navigator class="list_item" wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2" wx:key="name" url="/pages/goods_list/index?query=户外">
           <image class="" src="{{item2.image_src}}" mode="{{index2===0?'widthFix':'scaleToFill'}}">
           </image>
         </navigator>
