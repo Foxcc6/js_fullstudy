@@ -1,48 +1,25 @@
 <template>
-  <div class="header">
-    <Header>
-      <i class="iconfont" slot="left-icon">&#xe96d;</i>
-      <span slot="content">我的音乐</span>
-      <i class="iconfont" slot="right-icon">&#xe67a;</i>
-    </Header>
-    <tab></tab>
-
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
-    <!-- 播放页面 -->
-    <play></play>
-
-    <!-- menu -->
-    <sideBar></sideBar>
-  </div>
+<div>
+  <router-view></router-view>
+</div>
 </template>
 
 <script>
-import Header from '@/components/header'
-import sideBar from '@/components/sideBar'
-import tab from '@/components/tab'
-import play from '@/components/play'
 
 export default {
-    components:{
-      Header,
-      sideBar,
-      tab,
-      play
-    }
+ 
 }
 </script>
 
 <style lang="stylus">
 @font-face {
   font-family: 'iconfont';  /* project id 2052915 */
-  src: url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.eot');
-  src: url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.woff') format('woff'),
-  url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_2052915_af7qy3tzvo.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_2052915_217he1pdq2k.eot');
+  src: url('//at.alicdn.com/t/font_2052915_217he1pdq2k.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_2052915_217he1pdq2k.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_2052915_217he1pdq2k.woff') format('woff'),
+  url('//at.alicdn.com/t/font_2052915_217he1pdq2k.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_2052915_217he1pdq2k.svg#iconfont') format('svg');
 }
 .iconfont{
     font-family:"iconfont" !important;

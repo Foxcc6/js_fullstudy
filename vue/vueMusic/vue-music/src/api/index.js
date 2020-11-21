@@ -59,6 +59,34 @@ export default {
         return fetchGet('/song/url',{
             id
         })
+    },
+    // 获取轮播图
+    Banner(){
+        return fetchGet('/banner')
+    },
+    // 获取推荐歌单列表
+    RecommendList() {
+        return fetchGet('/personalized')
+    },
+    // 获取歌单详情
+    ListDetail(id) {
+        return fetchGet('/playlist/detail',{
+            id
+        })
+    },
+    // 获取歌手列表
+    SingerList(){
+        return fetchGet('/top/artists')
+    },
+    // 获取歌手50首热门歌曲
+    TopSong(id){
+        return fetchGet('/artist/top/song',{
+            id
+        })
+    },
+    // 获取榜单摘要
+    TopList(){
+        return fetchGet('/toplist/detail')
     }
 }
 
